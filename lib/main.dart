@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
@@ -32,42 +31,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var stud1 = Student('Mariia', 'Zhak');
-  var stud2 = Student('Misha', 'Mishyn');
+  var stud1 = Student(name: 'Mariia', surname: 'Zhak');
+  var stud2 = Student(name: 'Misha', surname: 'Mishyn');
 
   //function that is used to set age and return as a string
   String _setterAge(int age, Student stud) {
-    stud.setAge(age);
+    stud.setAge = age;
     return stud.outputAge();
   }
 
   //i wrote this functions here in order to give them ability to change states
   void _markAdder(Student stud) {
     setState(() {
-      stud.setMark(stud.getMark()+1);
+      stud.setMark = stud.getMark + 1;
     });
   }
+
   void _markSubstractor(Student stud) {
     setState(() {
-      stud.setMark(stud.getMark()-1);
+      stud.setMark = stud.getMark - 1;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
         title: Text(widget.title),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -75,15 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 200.0,
               alignment: Alignment.center,
               margin: const EdgeInsets.all(10.0),
-              decoration: const BoxDecoration(
-                  color: Color(0xFFFFCC80),
-                  border: Border(
-                  top: BorderSide(),
-                  left: BorderSide(),
-                  right: BorderSide(),
-                  bottom: BorderSide(),
-                  ),
-                ),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFFFCC80),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(12)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -101,7 +92,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       Expanded(
-                        child: Text(stud1.getMarkStr(), textAlign: TextAlign.center),
+                        child:
+                            Text(stud1.getMarkStr, textAlign: TextAlign.center),
                       ),
                       Expanded(
                         child: ElevatedButton(
@@ -110,26 +102,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           },
                           child: const Text('-'),
                         ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
                   ),
-                  ),
+                ],
+              ),
+            ),
             Container(
               width: 400.0,
               height: 200.0,
               alignment: Alignment.center,
               margin: const EdgeInsets.all(10.0),
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFCC80),
-                border: Border(
-                  top: BorderSide(),
-                  left: BorderSide(),
-                  right: BorderSide(),
-                  bottom: BorderSide(),
-                ),
-              ),
+              decoration: BoxDecoration(
+                  color: const Color(0xFFFFCC80),
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(12)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -147,7 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       Expanded(
-                        child: Text(stud2.getMarkStr(), textAlign: TextAlign.center),
+                        child:
+                            Text(stud2.getMarkStr, textAlign: TextAlign.center),
                       ),
                       Expanded(
                         child: ElevatedButton(
@@ -162,32 +150,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-
-                ],
-
-
+          ],
+        ),
       ),
-    ),
     );
   }
 }
 
-class Student{
-  String name ;
+class Student {
+  String name;
   String surname;
   int _age = 0;
   int _mark = 0;
 
-  Student(this.name, this.surname); //constructor
+  Student({required this.name, required this.surname}); //constructor
 
-  int getAge() => _age; //getter for age
-  void setAge(int age) => _age = age; //setter for age
+  int get getAge => _age; //getter for age
+  set setAge(int age) => _age = age; //setter for age
 
-  int getMark() => _mark;//getter for mark
-  String getMarkStr() => '$_mark';
-  void setMark(int mark) => _mark = mark; //setter for mark
+  int get getMark => _mark; //getter for mark
+  String get getMarkStr => '$_mark'; //getter for mark as string
 
-  String studData() => '$name $surname'; //returns name and surname as one string
+  set setMark(int mark) => _mark = mark; //setter for mark
+
+  String studData() =>
+      '$name $surname'; //returns name and surname as one string
   String outputAge() => 'Age: $_age'; //returns age as string in desired format
-
 }
